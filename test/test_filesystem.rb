@@ -29,4 +29,13 @@ class TestFilesystem < MiniTest::Unit::TestCase
 
 		assert_equal entries, @fs.contents('/')
 	end
+
+	def test_file_exists
+		file = stub 'RiakFS::File instance'
+
+		RiakFS::File.expects(:new).with(@client, '/example.txt').returns(file)
+		file.expects(:exists?).returns true
+
+		assert @fs.file?('/example.txt')
+	end
 end
