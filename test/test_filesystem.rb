@@ -20,19 +20,13 @@ class TestFilesystem < MiniTest::Unit::TestCase
 	end
 
 	def test_root_directory
-		bucket = stub 'riak bucket'
-		dir = stub 'riak directory'
 		directory = stub 'RiakFS::Directory instance'
 		
-		@client.expects(:bucket).with(:riak_fs).returns(bucket)
-		bucket.expects(:get).with('D-').returns(dir)
-		RiakFS::Directory.expects(:new).with(dir).returns(directory)
-		directory.expects(:data).returns <<-EOD
-		{"subdirectories":[], "files":["example.txt"]}
-		EOD
+		entries = ['example.txt', rand(36**10).to_s(36)]
 
-		directory_entries = @fs.contents
+		RiakFS::Directory.expects(:new).with(@client, '/').returns(directory)
+		directory.expects(:contents).returns entries
 
-		assert_equal ['example.txt'], directory_entries
+		assert_equal entries, @fs.contents('/')
 	end
 end
