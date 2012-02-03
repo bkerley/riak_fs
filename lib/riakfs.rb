@@ -1,5 +1,8 @@
-require "riakfs/version"
+require 'riak'
 
-module Riakfs
+require "riakfs/version"
+require 'riakfs/filesystem'
+
+module RiakFS
   # Your code goes here...
 end
