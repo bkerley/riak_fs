@@ -38,4 +38,14 @@ class TestFilesystem < MiniTest::Unit::TestCase
 
 		assert @fs.file?('/example.txt')
 	end
+
+	def test_read_file
+		file = stub 'RiakFS::File instance'
+		contents = rand(36**10).to_s(36)
+
+		RiakFS::File.expects(:new).with(@client, '/example.txt').returns(file)
+		file.expects(:contents).returns(contents)
+		
+		assert_equal contents, @fs.read_file('/example.txt') 
+	end
 end
