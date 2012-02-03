@@ -15,6 +15,11 @@ module RiakFS
 			f.exists?
 		end
 
+		def read_file(path)
+			f = file_for_path(path)
+			f.contents
+		end
+
 		private
 		def file_for_path(path)
 			File.new @riak_client, path
