@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency 'riak-client', '0.9.8'
   s.add_development_dependency 'minitest', '~> 2.11'
   s.add_development_dependency 'mocha', '~> 0.10'
   s.add_development_dependency 'rake', '~> 0.9.2'
